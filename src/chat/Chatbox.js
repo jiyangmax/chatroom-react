@@ -2,7 +2,6 @@ import React, {Component } from 'react';
 import { Row, Col } from 'antd';
 import './Chatbox.css';
 
-
 class Chatbox extends Component {
     render() {
         return <div className="chatbox">
