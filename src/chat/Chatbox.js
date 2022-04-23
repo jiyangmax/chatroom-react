@@ -14,6 +14,7 @@ class Chatbox extends Component {
     }
     this.inputChange = this.inputChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
+    this.keypress = this.keypress.bind(this);
 
   }
 
@@ -24,9 +25,17 @@ class Chatbox extends Component {
   sendMessage() {
     let messages = this.state.messageList;
     messages.push(this.state.inputValue);
-    this.setState({ message: messages,  })
+    this.setState({ message: messages, })
     this.setState({ inputValue: "" });
     console.log(this.state.inputValue);
+  }
+  keypress(e) {
+    if (e.which === 13 && e.altKey) {
+      this.setState({ inputValue: this.state.inputValue + "\n" })
+    } else if (e.which === 13) {
+      this.sendMessage() //发送消息
+      e.preventDefault();//禁止回车的默认换行
+    }
   }
 
   render() {
@@ -36,11 +45,11 @@ class Chatbox extends Component {
           <div className="chatbox-header">
           </div>
           <div className="chatbox-content">
-            <Message message={this.state.message}></Message>
+            <Message message={this.state.messageList}></Message>
           </div>
           <Row className="chatbox-input">
             <Col span={18}>
-              <TextArea type="textarea" rows={8} onChange={this.inputChange} value={this.state.inputValue} />
+              <TextArea type="textarea" rows={8} onChange={this.inputChange} onKeyPress={this.keypress} value={this.state.inputValue} />
             </Col>
             <Col span={6}>
               <Button type="primary" size="large" onClick={this.sendMessage} style={{ width: "100%", height: "100%", marginLeft: "2px" }}>

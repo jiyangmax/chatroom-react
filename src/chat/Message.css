@@ -15,7 +15,19 @@
     text-align: left;
 }
 
+.ant-list::-webkit-scrollbar{
+    width : 10px;  
+    height: 1px;
+}
+
+.ant-list::-webkit-scrollbar-thumb{
+    width: 10px;
+    height: 1px;
+    background: #d9d9d9;
+    border-radius: 10px;
+}
 .message-list{
     overflow: auto;
     height: 100%;
 }
+
