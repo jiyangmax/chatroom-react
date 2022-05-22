@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Row, Col, Input, Button } from 'antd';
 import './Chatbox.css';
 import Message from './Message.js'
+import { WEBSOCKET } from './const';
+
 
 const { TextArea } = Input;
 
@@ -27,6 +29,7 @@ class Chatbox extends Component {
     messages.push(this.state.inputValue);
     this.setState({ message: messages, })
     this.setState({ inputValue: "" });
+    WEBSOCKET.send(this.state.inputValue);
     console.log(this.state.inputValue);
   }
   keypress(e) {
@@ -45,7 +48,7 @@ class Chatbox extends Component {
           <div className="chatbox-header">
           </div>
           <div className="chatbox-content">
-            <Message message={this.state.messageList}></Message>
+            <Message></Message>
           </div>
           <Row className="chatbox-input">
             <Col span={18}>

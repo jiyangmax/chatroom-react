@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { List, Avatar } from 'antd';
+import { WEBSOCKET } from './const';
 import './Message.css';
 
 
@@ -7,12 +8,9 @@ class Message extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            messageList: props.message
+            messageList: []
         }
     }
-    static getDerivedStateFromProps (nextProps, prevState) {
-        return({messageList: nextProps.message});
-      }
     componentDidUpdate(prevProps, prevState, snapshot) {
     this.scrollToBottom();
     
@@ -25,7 +23,14 @@ class Message extends Component {
 
         // }
     };
-
+    componentDidMount() {
+  
+        WEBSOCKET.onmessage = (msg) => {
+            let messages = this.state.messageList;
+            messages.push(msg.data);
+            this.setState({ message: messages, })
+        }
+    }
     render(){
         return typeof(this.state.messageList) != "undefined" ? 
  <List id="messageRef"
