@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Input, Button } from 'antd';
+import { v4 as uuidv4 } from 'uuid';
 import './Chatbox.css';
 import Message from './Message.js'
 import { WEBSOCKET } from './const';
@@ -17,7 +18,7 @@ class Chatbox extends Component {
     this.inputChange = this.inputChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.keypress = this.keypress.bind(this);
-
+    this.msgId = uuidv4();
   }
 
   inputChange(e) {
@@ -29,7 +30,7 @@ class Chatbox extends Component {
     messages.push(this.state.inputValue);
     this.setState({ message: messages, })
     this.setState({ inputValue: "" });
-    WEBSOCKET.send(this.state.inputValue);
+    WEBSOCKET.send(this.msgId +","+this.state.inputValue);
     console.log(this.state.inputValue);
   }
   keypress(e) {
@@ -48,7 +49,7 @@ class Chatbox extends Component {
           <div className="chatbox-header">
           </div>
           <div className="chatbox-content">
-            <Message></Message>
+            <Message msgId={this.msgId}></Message>
           </div>
           <Row className="chatbox-input">
             <Col span={18}>

@@ -10,6 +10,7 @@ class Message extends Component {
         this.state = {
             messageList: []
         }
+        this.msgId = props.msgId;
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
     this.scrollToBottom();
@@ -28,7 +29,7 @@ class Message extends Component {
         WEBSOCKET.onmessage = (msg) => {
             let messages = this.state.messageList;
             messages.push(msg.data);
-            this.setState({ message: messages, })
+            this.setState({ messageList: messages, })
         }
     }
     render(){
@@ -37,12 +38,18 @@ class Message extends Component {
         className='message-list'
         size="small"
         dataSource={this.state.messageList}
-        renderItem={item => <List.Item>
-        
-          <div>{item}</div>
+        renderItem={item => 
+         {return this.msgId === item.split(",")[0] ?
+        <List.Item className='my-message'>
+          <div>{item.split(",")[1]}</div>
           <Avatar src="https://joeschmoe.io/api/v1/random" />
-    </List.Item>}
-    >        <div ref={el => { this.messagesEndRef = el; }} />
+        </List.Item>
+        :<List.Item className='others-message'>
+              <Avatar src="https://joeschmoe.io/api/v1/random" />
+        <div>{item.split(",")[1]}</div>
+        </List.Item>}}
+    >        
+    <div ref={el => { this.messagesEndRef = el; }} />
     </List>:<div></div>
     
     }

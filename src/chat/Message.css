@@ -2,9 +2,6 @@
     border: none !important;
 }
 
-.ant-list-item {
-    justify-content: flex-end !important;
-}
 
 .ant-list-item>div {
     margin-right: 4px;
@@ -31,3 +28,10 @@
     height: 100%;
 }
 
+.my-message{
+    justify-content: flex-end !important;
+}
+
+.others-message{
+    justify-content: flex-start !important;
+}
