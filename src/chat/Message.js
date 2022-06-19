@@ -3,7 +3,6 @@ import { List, Avatar } from 'antd';
 import { WEBSOCKET } from './const';
 import './Message.css';
 
-
 class Message extends Component {
     constructor(props) {
         super(props);

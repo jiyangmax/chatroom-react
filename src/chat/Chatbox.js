@@ -5,7 +5,6 @@ import './Chatbox.css';
 import Message from './Message.js'
 import { WEBSOCKET } from './const';
 
-
 const { TextArea } = Input;
 
 class Chatbox extends Component {
