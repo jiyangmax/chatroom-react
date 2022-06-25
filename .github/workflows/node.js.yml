@@ -34,4 +34,4 @@ jobs:
         pass: ${{ secrets.AWS_PASSWORD }}
         scp: build/* => /home/webapp/chatroom-react
         last_ssh: |
-          bash /usr/sbin/nginx -s reload
+          /usr/sbin/nginx -s reload
