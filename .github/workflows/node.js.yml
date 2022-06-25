@@ -32,4 +32,4 @@ jobs:
         host: ${{ secrets.AWS_IP }}
         user: root
         pass: ${{ secrets.AWS_PASSWORD }}
-        scp: build/* => /home/webapp/chatroom
+        scp: build/* => /home/webapp/chatroom-react
